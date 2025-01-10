@@ -72,7 +72,7 @@ namespace Script
 
                 //Player press Space to jump
                 if (Input.GetKeyDown(KeyCode.Space))
-                    Jump();
+                    OnJump();
             }
             else
             {
@@ -82,7 +82,7 @@ namespace Script
             //print(onWall());
         }
 
-        private void Jump()
+        public void OnJump()
         {
             if (IsGrounded())
             {
@@ -125,5 +125,6 @@ namespace Script
         {
             //return _horizontalInput == 0 && IsGrounded() && OnWall();
         }
+        
     }
 }
