@@ -9,6 +9,10 @@ namespace Script
         public float currentHealth { get; set; }
         private Animator _animator;
         private bool _dead;
+        
+        [Header("Components")]
+      // [SerializeField] private Behaviour[] components;
+      [SerializeField] private GameObject[] components;
 
         private void Awake()
         {
@@ -32,16 +36,21 @@ namespace Script
                 if (!_dead)
                 {
                     _animator.SetTrigger("die");
-                    //Player
-                    if (GetComponent<PlayerMovement>() != null)
-                        GetComponent<PlayerMovement>().enabled = false;
-                    //Enemy
-                    if (GetComponentInParent<EnemyPatrol>()!= null)
-                        GetComponentInParent<EnemyPatrol>().enabled = false;
-                    gameObject.SetActive(false);
-                    // if (GetComponent<MeeleEnemy>() != null)
-                    //     GetComponent<MeeleEnemy>().enabled = false;
-                        
+                    // //Player
+                    // if (GetComponent<PlayerMovement>() != null)
+                    //     GetComponent<PlayerMovement>().enabled = false;
+                    // //Enemy
+                    // if (GetComponentInParent<EnemyPatrol>()!= null)
+                    //     GetComponentInParent<EnemyPatrol>().enabled = false;
+                    // //gameObject.SetActive(false);
+                    // // if (GetComponent<MeeleEnemy>() != null)
+                    // //     GetComponent<MeeleEnemy>().enabled = false;
+                    
+                    //Deactivate all attached component class
+                    foreach (GameObject component in components)
+                    {
+                        component.SetActive(false);
+                    }
                     _dead = true;
                 }
             }
