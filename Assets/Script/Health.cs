@@ -18,6 +18,7 @@ namespace Script
         public void TakeDamage(float damage)
         {
             currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
+            
             if (currentHealth > 0)
             {
                 //player hurt

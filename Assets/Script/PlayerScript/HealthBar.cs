@@ -13,17 +13,18 @@ namespace Script
         void Start()
         {
             totalHealthBar.fillAmount = playerHealth.currentHealth / 10;
+            //playerHealth.currentHealth -= 1;
         }
 
         // Update is called once per frame
         void Update()
         {
             currentHealthBar.fillAmount = playerHealth.currentHealth / 10;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //totalHealthBar.fillAmount--;
-                TakeDamege(playerHealth.currentHealth);
-            }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     //totalHealthBar.fillAmount--;
+            //    // TakeDamege(playerHealth.currentHealth);
+            // }
         }
     }
 }
