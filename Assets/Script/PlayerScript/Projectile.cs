@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -5,7 +6,7 @@ namespace Script
 {
     public class Projectile : MonoBehaviour
     {
-      [SerializeField] private float speed;
+        [SerializeField] private float speed;
         private float _direction;
         private bool _hit;
         private float _lifetime;
@@ -28,21 +29,29 @@ namespace Script
                 //Deactivate();
                 return;
             }
+
             float movementSpeed = speed * Time.deltaTime * _direction;
             transform.Translate(movementSpeed, 0, 0);
             _lifetime += Time.deltaTime;
-            if (_lifetime >2) gameObject.SetActive(false);
+            if (_lifetime > 2) gameObject.SetActive(false);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-           
             _hit = true;
             _boxCollider.enabled = false;
             //_animator.SetTrigger("explode");
             Explode();
-            
+
             //Debug.Log(_hit);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.tag=="Enemy")
+            {
+                other.GetComponent<Health>().TakeDamage(1);
+            }
         }
 
         public void SetDirection(float direction)
@@ -54,7 +63,7 @@ namespace Script
             _boxCollider.enabled = true;
 
             float localScaleX = transform.localScale.x;
-            
+
             if (Mathf.Sign(localScaleX) != direction)
             {
                 localScaleX = -localScaleX;
@@ -72,6 +81,5 @@ namespace Script
         {
             _animator.SetTrigger("explode");
         }
-        
     }
 }

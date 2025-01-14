@@ -1,3 +1,4 @@
+using Script.EnemyScript;
 using UnityEngine;
 
 namespace Script
@@ -18,7 +19,7 @@ namespace Script
         public void TakeDamage(float damage)
         {
             currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
-            
+
             if (currentHealth > 0)
             {
                 //player hurt
@@ -31,7 +32,16 @@ namespace Script
                 if (!_dead)
                 {
                     _animator.SetTrigger("die");
-                    GetComponent<PlayerMovement>().enabled = false;
+                    //Player
+                    if (GetComponent<PlayerMovement>() != null)
+                        GetComponent<PlayerMovement>().enabled = false;
+                    //Enemy
+                    if (GetComponentInParent<EnemyPatrol>()!= null)
+                        GetComponentInParent<EnemyPatrol>().enabled = false;
+                    gameObject.SetActive(false);
+                    // if (GetComponent<MeeleEnemy>() != null)
+                    //     GetComponent<MeeleEnemy>().enabled = false;
+                        
                     _dead = true;
                 }
             }
